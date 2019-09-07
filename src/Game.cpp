@@ -2,10 +2,14 @@
 
 #include "./Game.h"
 #include "./Constants.h"
+#include "./EntityManager.h"
 #include "../lib/glm/glm.hpp"
 
 glm::vec2 ProjectilePos = glm::vec2(0.f, 0.f);
 glm::vec2 ProjectileVel = glm::vec2(20.f, 30.f);
+
+EntityManager manager;
+SDL_Renderer* Game::renderer;
 
 Game::Game() {}
 Game::~Game() {}

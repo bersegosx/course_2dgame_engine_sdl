@@ -7,7 +7,6 @@ class Game {
     private:
         bool isRunning;
         SDL_Window *window;
-        SDL_Renderer *renderer;
 
     public:
         float timeSinceLastFrame;
@@ -16,7 +15,9 @@ class Game {
         Game();
         ~Game();
 
+        static SDL_Renderer *renderer;
         void Initialize(int w, int h);
+        void LoadLevel(int levelNumber);
         void ProcessInput();
         void Update();
         void Render();
