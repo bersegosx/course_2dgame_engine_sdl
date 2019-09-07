@@ -4,6 +4,7 @@
 
 #include "Component.h"
 
+void Component::Initialize() {}
 void Component::Render() {}
 
 void Component::Update(float deltaTime) {}

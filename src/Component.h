@@ -8,13 +8,12 @@
 class Entity;
 
 class Component {
-    private:
+    public:
         Entity *owner;
 
-    public:
-        void Initialize();
-        void Update(float deltaTime);
-        void Render();
+        virtual void Initialize();
+        virtual void Update(float deltaTime);
+        virtual void Render();
 };
 
 

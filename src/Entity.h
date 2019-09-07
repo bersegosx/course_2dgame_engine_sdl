@@ -27,6 +27,17 @@ class Entity {
         void Render();
         void Destroy();
         bool IsActive() const;
+
+        template <typename T, typename... TArgs>
+        T& AddComponent(TArgs&&... args) {
+            T* component(new T(std::forward<TArgs>(args)...));
+
+            component->owner = this;
+            components.push_back(component);
+            component->Initialize();
+
+            return *component;
+        }
 };
 
 

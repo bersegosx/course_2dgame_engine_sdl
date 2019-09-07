@@ -3,6 +3,7 @@
 #include "./Game.h"
 #include "./Constants.h"
 #include "./EntityManager.h"
+#include "./Components/TransformComponent.h"
 #include "../lib/glm/glm.hpp"
 
 glm::vec2 ProjectilePos = glm::vec2(0.f, 0.f);
@@ -40,8 +41,15 @@ void Game::Initialize(int w, int h) {
         std::cerr << "Error init renderer" << std::endl;
     }
 
+    LoadLevel(1);
+
     isRunning = true;
     return;
+}
+
+void Game::LoadLevel(int levelNumber) {
+    Entity& newEntity(manager.AddEntity("projectile"));
+    newEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 }
 
 void Game::ProcessInput() {
@@ -66,30 +74,20 @@ void Game::ProcessInput() {
 void Game::Update() {
     // clamp fps
     SDL_Delay(MAX_TIME_PER_FRAME - ((SDL_GetTicks() - timeSinceLastFrame) / 1000.f));
-
     float deltaTime = (SDL_GetTicks() - timeSinceLastFrame) / 1000.f;
-
-    ProjectilePos = glm::vec2(
-        ProjectilePos.x + ProjectileVel.x * deltaTime,
-        ProjectilePos.y + ProjectileVel.y * deltaTime
-    );
-
     timeSinceLastFrame = SDL_GetTicks();
+
+    manager.Update(deltaTime);
 }
 
 void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
 
-    SDL_Rect projectile {
-        (int) ProjectilePos.x,
-        (int) ProjectilePos.y,
-        10,
-        10
-    };
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer, &projectile);
+    if (manager.HasNoEntities()) {
+        return;
+    }
+    manager.Render();
 
     SDL_RenderPresent(renderer);
 }

@@ -7,7 +7,6 @@
 
 #include <SDL2/SDL.h>
 #include "../EntityManager.h"
-#include "../Game.h"
 #include "../../lib/glm/glm.hpp"
 
 class TransformComponent: public Component {
@@ -43,7 +42,7 @@ class TransformComponent: public Component {
                 height
             };
             SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-            SDL_RenderFillRect(Game::render, &transformRect);
+            SDL_RenderFillRect(Game::renderer, &transformRect);
         }
 };
 
