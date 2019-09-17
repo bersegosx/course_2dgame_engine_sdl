@@ -5,7 +5,7 @@
 #ifndef INC_2DGAMEENGINE_TEXTUREMANAGER_H
 #define INC_2DGAMEENGINE_TEXTUREMANAGER_H
 
-#include "./Game.h"
+#include <SDL2/SDL.h>
 
 class TextureManager {
     public:

@@ -1,15 +1,18 @@
 #include <iostream>
 
-#include "./Game.h"
 #include "./Constants.h"
+#include "./Game.h"
+#include "./AssetManager.h"
 #include "./EntityManager.h"
 #include "./Components/TransformComponent.h"
+#include "./Components/SpriteComponent.h"
 #include "../lib/glm/glm.hpp"
 
 glm::vec2 ProjectilePos = glm::vec2(0.f, 0.f);
 glm::vec2 ProjectileVel = glm::vec2(20.f, 30.f);
 
 EntityManager manager;
+AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 
 Game::Game() {}
@@ -48,8 +51,12 @@ void Game::Initialize(int w, int h) {
 }
 
 void Game::LoadLevel(int levelNumber) {
-    Entity& newEntity(manager.AddEntity("projectile"));
+    std::string textureFilePath = "./assets/images/tank-big-right.png";
+    assetManager->AddTexture("tank-image", textureFilePath.c_str());
+
+    Entity& newEntity(manager.AddEntity("tank"));
     newEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+    newEntity.AddComponent<SpriteComponent>("tank-image");
 }
 
 void Game::ProcessInput() {
