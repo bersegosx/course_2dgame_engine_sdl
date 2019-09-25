@@ -48,7 +48,7 @@ class SpriteComponent: public Component {
 
                 animations.emplace("DownAnimation", downAnimation);
                 animations.emplace("RightAnimation", rightAnimation);
-                animations.emplace("LefAnimation", leftAnimation);
+                animations.emplace("LeftAnimation", leftAnimation);
                 animations.emplace("UpAnimation", upAnimation);
 
                 this->animationIndex = 0;

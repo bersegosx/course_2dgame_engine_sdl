@@ -6,6 +6,7 @@
 #include "./EntityManager.h"
 #include "./Components/TransformComponent.h"
 #include "./Components/SpriteComponent.h"
+#include "./Components/KeyboardControlComponent.h"
 #include "../lib/glm/glm.hpp"
 
 glm::vec2 ProjectilePos = glm::vec2(0.f, 0.f);
@@ -14,6 +15,7 @@ glm::vec2 ProjectileVel = glm::vec2(20.f, 30.f);
 EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
+SDL_Event Game::event;
 
 Game::Game() {}
 Game::~Game() {}
@@ -54,17 +56,17 @@ void Game::LoadLevel(int levelNumber) {
     assetManager->AddTexture("tank-image", std::string("./assets/images/tank-big-right.png").c_str());
     assetManager->AddTexture("chopper-image", std::string("./assets/images/chopper-spritesheet.png").c_str());
 
-    Entity& tankEntity(manager.AddEntity("tank"));
-    tankEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
-    tankEntity.AddComponent<SpriteComponent>("tank-image");
-
     Entity& chopperEntity(manager.AddEntity("chopper"));
     chopperEntity.AddComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
     chopperEntity.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
+    chopperEntity.AddComponent<KeyboardControlComponent>("up", "right", "down", "left", "space");
+
+    Entity& tankEntity(manager.AddEntity("tank"));
+    tankEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+    tankEntity.AddComponent<SpriteComponent>("tank-image");
 }
 
 void Game::ProcessInput() {
-    SDL_Event event;
     SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_QUIT: {

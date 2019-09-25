@@ -23,6 +23,8 @@ class Game {
 
         static SDL_Renderer *renderer;
         static AssetManager* assetManager;
+        static SDL_Event event;
+
         void Initialize(int w, int h);
         void LoadLevel(int levelNumber);
         void ProcessInput();
