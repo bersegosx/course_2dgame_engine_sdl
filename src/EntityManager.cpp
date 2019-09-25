@@ -28,7 +28,7 @@ void EntityManager::Render() {
 
 Entity& EntityManager::AddEntity(std::string entityName) {
     Entity *entity = new Entity(*this, entityName);
-    entities.push_back(entity);
+    entities.emplace_back(entity);
 
     return *entity;
 }
