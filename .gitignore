@@ -1,3 +1,4 @@
 game
 .vscode/
 .idea/
+cmake-build-debug/
