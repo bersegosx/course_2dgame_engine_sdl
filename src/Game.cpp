@@ -62,12 +62,12 @@ void Game::LoadLevel(int levelNumber) {
     map = new Map("jungle-tiletexture", 2, 32);
     map->LoadMap("./assets/tilemaps/jungle.map", 25, 20);
 
-    Entity& chopperEntity(manager.AddEntity("chopper"));
+    Entity& chopperEntity(manager.AddEntity("chopper", PLAYER_LAYER));
     chopperEntity.AddComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
     chopperEntity.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
     chopperEntity.AddComponent<KeyboardControlComponent>("up", "right", "down", "left", "space");
 
-    Entity& tankEntity(manager.AddEntity("tank"));
+    Entity& tankEntity(manager.AddEntity("tank", ENEMY_LAYER));
     tankEntity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
     tankEntity.AddComponent<SpriteComponent>("tank-image");
 }
