@@ -8,6 +8,9 @@
 
 class AssetManager;
 
+#ifndef INC_2DGAME_ENGINE_GAME_H
+#define INC_2DGAME_ENGINE_GAME_H
+
 class Game {
 
     private:
@@ -33,4 +36,7 @@ class Game {
         void Render();
         void HandleCameraMovement();
         void Destroy();
+        void CheckCollisions();
 };
+
+#endif

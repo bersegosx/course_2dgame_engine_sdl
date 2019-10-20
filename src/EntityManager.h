@@ -6,6 +6,7 @@
 #define INC_2DGAMEENGINE_ENTITYMANAGER_H
 
 #include "./Entity.h"
+#include "./Component.h"
 #include <vector>
 
 class EntityManager {
@@ -18,6 +19,7 @@ class EntityManager {
         void Render();
         bool HasNoEntities();
         Entity& AddEntity(std::string entityName, LayerType layer);
+        std::string CheckEntityCollisions(Entity* myEntity) const;
         std::vector<Entity*> GetEntitiesByLayer(LayerType layer) const;
         std::vector<Entity*> GetEntities() const;
         unsigned int GetEntityCount();
