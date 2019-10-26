@@ -39,6 +39,10 @@ class ColliderComponent: public Component {
             destinationRectangle.x = collider.x - Game::camera.x;
             destinationRectangle.y = collider.y - Game::camera.y;
         }
+
+        void Render() override {
+            SDL_RenderDrawRect(Game::renderer, &collider);
+        }
 };
 
 #endif //INC_2DGAME_ENGINE_COLLIDERCOMPONENT_H
