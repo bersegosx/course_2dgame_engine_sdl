@@ -9,6 +9,7 @@
 #include "./Components/SpriteComponent.h"
 #include "./Components/ColliderComponent.h"
 #include "./Components/KeyboardControlComponent.h"
+#include "./Components/TextLabelComponent.h"
 #include "../lib/glm/glm.hpp"
 
 glm::vec2 ProjectilePos = glm::vec2(0.f, 0.f);
@@ -31,6 +32,10 @@ bool Game::IsRunning() const {
 void Game::Initialize(int w, int h) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cerr << "Error init SDL" << std::endl;
+    }
+
+    if (TTF_Init() != 0) {
+        std::cerr << "Error init SDL TTF" << std::endl;
     }
 
     window = SDL_CreateWindow(
@@ -63,6 +68,7 @@ void Game::LoadLevel(int levelNumber) {
     assetManager->AddTexture("chopper-image", std::string("./assets/images/chopper-spritesheet.png").c_str());
     assetManager->AddTexture("jungle-tiletexture", std::string("./assets/tilemaps/jungle.png").c_str());
     assetManager->AddTexture("hellport-image", std::string("./assets/images/heliport.png").c_str());
+    assetManager->AddFont("charriot-font", std::string("./assets/fonts/charriot.ttf").c_str(), 14);
 
     map = new Map("jungle-tiletexture", 2, 32);
     map->LoadMap("./assets/tilemaps/jungle.map", 25, 20);
@@ -81,6 +87,9 @@ void Game::LoadLevel(int levelNumber) {
     tankEntity.AddComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
     tankEntity.AddComponent<SpriteComponent>("hellport-image");
     tankEntity.AddComponent<ColliderComponent>("LEVEL_COMPLETE", 470, 420, 32, 32);
+
+    Entity& labelLevelName(manager.AddEntity("LabelLevelName", UI_LAYER));
+    labelLevelName.AddComponent<TextLabelComponent>(10, 10, "First Level...", "charriot-font", WHITE_COLOR);
 }
 
 void Game::ProcessInput() {
