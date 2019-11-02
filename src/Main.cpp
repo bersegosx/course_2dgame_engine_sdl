@@ -8,8 +8,13 @@ int main(int argc, char* args[]) {
     game->Initialize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     while (game->IsRunning()) {
+        std::cout << "game->ProcessInput" << std::endl;
         game->ProcessInput();
+
+        std::cout << "game->Update" << std::endl;
         game->Update();
+
+        std::cout << "game->Render" << std::endl;
         game->Render();
     }
 
