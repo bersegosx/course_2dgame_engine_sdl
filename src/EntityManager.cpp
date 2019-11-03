@@ -99,3 +99,13 @@ std::vector<Entity*> EntityManager::GetEntitiesByLayer(LayerType layer) const {
 
     return selectedEntities;
 }
+
+Entity* EntityManager::GetEntityByName(std::string name) {
+    for (auto* entity: entities) {
+        if (entity->name.compare(name) == 0) {
+            return entity;
+        }
+    }
+
+    return NULL;
+}

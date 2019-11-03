@@ -24,10 +24,10 @@ enum LayerType {
     TILEMAP_LAYER = 0,
     VEGETATION_LAYER = 1,
     ENEMY_LAYER = 2,
-    PLAYER_LAYER = 3,
-    PROJECTILE_LAYER = 4,
-    UI_LAYER = 5,
-    OBSTACLE_LAYER = 6,
+    OBSTACLE_LAYER = 3,
+    PLAYER_LAYER = 4,
+    PROJECTILE_LAYER = 5,
+    UI_LAYER = 6
 };
 
 const unsigned int NUM_LAYERS = 7;
